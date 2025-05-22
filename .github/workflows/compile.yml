@@ -32,7 +32,7 @@ jobs:
         with:
           waf-args: "configure build debug"
 
-      - name: Publish Test Results
+      - name: Publish UTest Results
         uses: EnricoMi/publish-unit-test-result-action@v2.19.0
         with:
           files: |
@@ -50,3 +50,10 @@ jobs:
         with:
           name: pysys_output
           path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
+
+      - name: Publish SysTest Results
+        uses: EnricoMi/publish-unit-test-result-action@v2.19.0
+        with:
+          files: |
+            ${{ steps.pysys.outputs.artifact_JUnitXMLResultsDir }}/*.xml
+          check_name: "System Tests"
