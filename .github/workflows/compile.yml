@@ -45,9 +45,8 @@ jobs:
         uses: apes-suite/pysys-action@v1.0.0
 
       - name: Upload PySys archive artifacts for any test failures
-        if: inputs.systest == true
         uses: actions/upload-artifact@v4.6.2
-        if: always() && steps.pysys.outputs.artifact_TestOutputArchiveDir
+        if: inputs.systest == true && steps.pysys.outputs.artifact_TestOutputArchiveDir
         with:
           name: pysys_output
           path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
