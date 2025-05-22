@@ -6,6 +6,8 @@ Reusable Github workflows for the APES repositories
   The waf unit tests are being run and their report is published accordingly.
   This should only be run in pull request.
   Needs the permission to write `checks` and `pull-requests`.
+  If the pull request is not a draft, this workflow proceeds to run the
+  system tests with pysys.
 
 * **ford.yml**: create FORD documentation with waf and deploy it to the github
   pages of the repository. Takes a `name` indicating the tool for which the
