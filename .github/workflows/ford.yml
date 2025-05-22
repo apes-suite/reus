@@ -1,0 +1,45 @@
+name: Fordoc
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        description: 'Name of the tool to create documentation for'
+        required: true
+        type: string
+      docdir:
+        description: 'Path to the docu directory'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  ford-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build ${{ inputs.name }} Documentation
+        uses: apes-suite/build-action@v1.1.1
+        with:
+          waf-args: "--fordonline configure docu"
+          obtain: "${{ inputs.docdir }}/docu"
+
+      - name: Change docu ownership
+        run: |
+          sudo chown -R $USER docu
+
+      - name: Deploy Documentation
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docu
