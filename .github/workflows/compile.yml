@@ -7,6 +7,10 @@ on:
         description: 'Name of the tool to compile'
         required: true
         type: string
+      systest:
+        description: 'Whether to run pysys-tests after compilation'
+        default: false
+        type: boolean
 
 jobs:
   build-debug-utest:
@@ -38,7 +42,7 @@ jobs:
 
   system-test:
     needs: build-utest
-    if: github.event.pull_request.draft == false
+    if: inputs.systest == true
     permissions:
       checks: write
       pull-requests: write
