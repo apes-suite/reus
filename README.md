@@ -3,9 +3,16 @@ Reusable Github workflows for the APES repositories
 
 * **compile.yml**: compile `build debug` with the build-action for an APES tool.
   Takes a `name` input parameter to label the build step accordingly.
+  The `systest` input parameter is a boolean that indicates whether pysys tests
+  should be run after a successful compilation.
+  For example the caller may want to run the system tests only for pull requests
+  that are no longer in draft mode and could pass
+  `${{ github.event.pull_request.draft == false }}`.
   The waf unit tests are being run and their report is published accordingly.
   This should only be run in pull request.
   Needs the permission to write `checks` and `pull-requests`.
+  If `systest` is `true`, the workflow proceeds to run the
+  system tests with pysys.
 
 * **ford.yml**: create FORD documentation with waf and deploy it to the github
   pages of the repository. Takes a `name` indicating the tool for which the
