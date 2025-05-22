@@ -14,7 +14,6 @@ on:
 
 jobs:
   build-debug-utest:
-    id: build-utest
     permissions:
       checks: write
       pull-requests: write
@@ -41,7 +40,7 @@ jobs:
           check_name: "Waf Unit Tests"
 
   system-test:
-    needs: build-utest
+    needs: build-debug-utest
     if: inputs.systest == true
     permissions:
       checks: write
