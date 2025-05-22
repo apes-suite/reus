@@ -4,6 +4,7 @@ on:
   workflow_call:
     inputs:
       name: 
+        description: 'Name of the tool to compile'
         required: true
         type: string
 
