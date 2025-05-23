@@ -29,10 +29,9 @@ jobs:
           submodules: recursive
 
       - name: Build ${{ inputs.name }} Documentation
-        uses: apes-suite/build-action@v1.1.1
+        uses: apes-suite/build-action@v2.0.0
         with:
           waf-args: "--fordonline configure docu"
-          obtain: "${{ inputs.docdir }}/docu"
 
       - name: Change docu ownership
         run: |
@@ -42,4 +41,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: docu
+          folder: ${{ inputs.docdir }}/docu
