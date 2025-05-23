@@ -27,6 +27,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-tags: true
 
       - name: Build ${{ inputs.name }} Documentation
         uses: apes-suite/build-action@v2.0.0
