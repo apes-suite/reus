@@ -33,10 +33,6 @@ jobs:
         with:
           waf-args: "--fordonline configure docu"
 
-      - name: Change docu ownership
-        run: |
-          sudo chown -R $USER docu
-
       - name: Deploy Documentation
         uses: JamesIves/github-pages-deploy-action@v4
         with:
