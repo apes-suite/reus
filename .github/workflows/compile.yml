@@ -28,17 +28,17 @@ jobs:
           submodules: recursive
 
       - name: Configure ${{ inputs.name }}
-        uses: apes-suite/build-action@v1.1.1
+        uses: apes-suite/build-action@v2.0.0
         with:
           waf-args: "configure"
 
       - name: Compile build ${{ inputs.name }}
-        uses: apes-suite/build-action@v1.1.1
+        uses: apes-suite/build-action@v2.0.0
         with:
           waf-args: "build"
 
       - name: Compile debug ${{ inputs.name }}
-        uses: apes-suite/build-action@v1.1.1
+        uses: apes-suite/build-action@v2.0.0
         with:
           waf-args: "debug"
 
