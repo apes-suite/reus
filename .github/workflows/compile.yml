@@ -27,10 +27,20 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Build ${{ inputs.name }}
+      - name: Configure ${{ inputs.name }}
         uses: apes-suite/build-action@v1.1.1
         with:
-          waf-args: "configure build debug"
+          waf-args: "configure"
+
+      - name: Compile build ${{ inputs.name }}
+        uses: apes-suite/build-action@v1.1.1
+        with:
+          waf-args: "build"
+
+      - name: Compile debug ${{ inputs.name }}
+        uses: apes-suite/build-action@v1.1.1
+        with:
+          waf-args: "debug"
 
       - name: Publish UTest Results
         uses: EnricoMi/publish-unit-test-result-action@v2.19.0
@@ -45,13 +55,14 @@ jobs:
         uses: apes-suite/pysys-action@v1.0.2
 
       - name: Upload PySys archive artifacts for any test failures
-        uses: actions/upload-artifact@v4.6.2
         if: inputs.systest == true && steps.pysys.outputs.artifact_TestOutputArchiveDir
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: pysys_output
           path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
 
       - name: Publish SysTest Results
+        if: inputs.systest == true
         uses: EnricoMi/publish-unit-test-result-action@v2.19.0
         with:
           files: |
