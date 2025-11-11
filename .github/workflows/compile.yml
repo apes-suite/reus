@@ -53,7 +53,7 @@ jobs:
       - name: Run system tests
         if: inputs.systest == true
         id: pysys
-        uses: apes-suite/pysys-action@v1.0.2
+        uses: apes-suite/pysys-action@v1.0.3
 
       - name: Upload PySys archive artifacts for any test failures
         if: always() && inputs.systest == true && steps.pysys.outputs.artifact_TestOutputArchiveDir
