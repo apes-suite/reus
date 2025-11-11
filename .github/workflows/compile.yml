@@ -60,17 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4.6.2
         with:
           name: pysys_output
-          path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
-          
-      - name: Show testrundir
-        if: always()
-        run: |
-          pwd
-          echo ${{ steps.pysys.outputs.testrundir }}
-          ls -la ${{ steps.pysys.outputs.testrundir }}
-          ls -la ${{ steps.pysys.outputs.testrundir }}/__pysys_output_archives
-          ls -la ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
-        shell: bash
+          path: ${{ steps.pysys.outputs.testrundir }}/__pysys_output_archives
 
       - name: Publish SysTest Results
         if: always() && inputs.systest == true
