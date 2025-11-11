@@ -63,7 +63,10 @@ jobs:
           path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
           
       - name: Show testrundir
-        run: ls -la ${{ steps.pysys.outputs.testrundir }}
+        if: always()
+        run: |
+          echo ${{ steps.pysys.outputs.testrundir }}
+          ls -la ${{ steps.pysys.outputs.testrundir }}
         shell: bash
 
       - name: Publish SysTest Results
