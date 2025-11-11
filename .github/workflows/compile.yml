@@ -61,6 +61,10 @@ jobs:
         with:
           name: pysys_output
           path: ${{ steps.pysys.outputs.artifact_TestOutputArchiveDir }}
+          
+      - name: Show testrundir
+        run: ls -la ${{ steps.pysys.outputs.testrundir }}
+        shell: bash
 
       - name: Publish SysTest Results
         if: always() && inputs.systest == true
